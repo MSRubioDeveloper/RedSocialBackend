@@ -1,1 +1,23 @@
-<p>register-page works!</p>
+<div class="login">
+  <h1>Red Social</h1>
+  <!-- <div class="login-btns-container">
+    <button >Login</button>
+    <button (click)="redirectLogin()">Resgitrate</button>
+  </div> -->
+
+  <div class="input-container">
+    <input #usuario type="text" placeholder="Nombre de usuario">
+    <input #email type="text" placeholder="email">
+    <input #password type="text" placeholder="password">
+
+    <button id="login-btn"> Registrate </button>
+    <a >Forgot Your Password?</a>
+    <div>
+      <a routerLink="/auth/login">¿Ya tienes cuenta?</a>
+    </div>
+
+    <p> Al logearte aceptas los terminos y condiciones y la politica de privacidad</p>
+  </div>
+
+
+</div>

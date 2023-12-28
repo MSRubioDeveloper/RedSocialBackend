@@ -11,8 +11,9 @@ const routes: Routes = [
     component: LayoutPageComponent,
     //auth/login, auth/ register
     children: [
-      {path: "login", component: LoginPageComponent},
-      {path: "register",component: RegisterPageComponent}
+      {path: "login",component: LoginPageComponent},
+      {path: "register",component: RegisterPageComponent},
+      {path: "**", redirectTo: "login"},
     ]
   },
 ];
