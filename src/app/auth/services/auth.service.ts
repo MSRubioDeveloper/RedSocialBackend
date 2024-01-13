@@ -10,7 +10,7 @@ import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfac
 export class AuthService {
 
  constructor() { 
-    //  this.checkAuthStatus().subscribe()
+     this.checkAuthStatus().subscribe()
   }
 
  
