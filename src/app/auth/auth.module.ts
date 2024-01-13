@@ -7,6 +7,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { MaterialModule } from '../material/material.module';
 import { VideoPageComponent } from './pages/video-page/video-page.component';
 import { NgPrimeModule } from '../ng-prime/ng-prime.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,9 @@ import { NgPrimeModule } from '../ng-prime/ng-prime.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    MaterialModule
+    MaterialModule,
+    NgPrimeModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

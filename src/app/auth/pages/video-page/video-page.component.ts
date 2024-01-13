@@ -19,14 +19,7 @@ export class VideoPageComponent {
     if (this.videoPlayerRef) {
       this.videoPlayerRef.nativeElement.muted = true;
       this.videoPlayerRef.nativeElement.volume = 0.2;
-      this.videoPlayerRef.nativeElement.play();
 
-      this.videoPlayerRef.nativeElement.oncanplay = () =>{
-         // Establecer autoplay a true para reproducir automáticamente
-         this.videoPlayerRef.nativeElement.autoplay = true;
-         // Iniciar la reproducción del video
-         this.videoPlayerRef.nativeElement.play();
-      }
 
     }
   }

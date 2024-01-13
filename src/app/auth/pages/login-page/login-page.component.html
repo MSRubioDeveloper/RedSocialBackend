@@ -5,17 +5,25 @@
     <button (click)="redirectLogin()">Resgitrate</button>
   </div> -->
 
-  <div class="input-container">
-    <input #email type="text" placeholder="email">
-    <input #password type="text" placeholder="password">
-    <button id="login-btn"> Login </button>
+  <form class="input-container" [formGroup]="myForm" 
+  (ngSubmit)="login()">
+
+    <input formControlName="email" #email type="text" placeholder="email"
+    [ngStyle]="propiedadesErrorInput"
+    >
+   
+    <input formControlName="password" #password type="password" placeholder="password"
+    [ngStyle]="propiedadesErrorInput">
+
+    <!-- <p-button label="Help" severity="help"></p-button> -->
+    <button id="login-btn" type="submit"> Login </button>
     <a >Forgot Your Password?</a>
     <div>
       <a routerLink="/auth/register">¿No tienes cuenta?</a>
     </div>
 
     <p> Al logearte aceptas los terminos y condiciones y la politica de privacidad</p>
-  </div>
+  </form>
 
 
 </div>

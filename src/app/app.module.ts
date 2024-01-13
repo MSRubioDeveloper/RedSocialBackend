@@ -5,7 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { NgPrimeModule } from './ng-prime/ng-prime.module';
 
+import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +20,12 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     BrowserAnimationsModule,
 
-    SharedModule
+    SharedModule,
+    NgPrimeModule,
+
+    ToastrModule.forRoot(),
+
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
