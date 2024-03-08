@@ -1,0 +1,44 @@
+
+#app-container{
+  background-color: #f0f2f5;
+}
+
+#spacer {
+    flex: 1 1 auto;
+  }
+
+
+#imgPerfil{
+  border-radius: 15px;
+  width: 26px;
+  height: 26px;
+}
+
+#menuImg{
+  width: 40px;
+  border-radius: 50px;
+  height: 40px;
+}
+
+#name{
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+#imgBack{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* background-image: url("../../../../assets/images/defaultImagePerfil.jpg"); */
+}
+#imgPerfil{
+  border-radius: 50px;
+  width: 33px;
+  height: 33px;
+}
+
+.menu-container mat-toolbar{
+  /* background-color:#23252b ; */
+}
+

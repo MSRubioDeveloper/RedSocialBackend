@@ -1,6 +1,75 @@
-<h1>Social media</h1>
-<hr>
 
-<h3>user</h3>
 
-<pre> {{ user() | json}}</pre>
+<div id="app-container">
+  <!-- sidenav -->
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px'}">
+      <mat-toolbar>
+          <!-- <span>Menu</span> -->
+          <img id="menuImg" src="../../../../assets/images/defaultImagePerfil.jpg" alt="perfil-img">
+
+           
+          <!-- <span id="name">{{ user()?.name}}</span> -->
+          <span id="spacer"></span>
+
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+      </mat-toolbar>
+
+      <mat-nav-list>
+        <mat-list-item 
+        *ngFor="let item of sidebarItems"
+        [routerLink]="item.url"
+        (click)="sidenav.toggle()"
+        >
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          {{ item.label }}
+        </mat-list-item>
+      </mat-nav-list>
+
+  </mat-sidenav>
+
+
+  <div class="menu-container" id="topMenu">
+    <mat-toolbar color="primary">
+      <button mat-icon-button  (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <!-- <span> Bienvenido {{user()?.name}}</span> -->
+      <span class="spacer"></span>
+
+      <button mat-icon-button >
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <button id="imgBack" mat-icon-button [matMenuTriggerFor]="menu">
+        <img id="imgPerfil" src="../../../../assets/images/defaultImagePerfil.jpg" alt="perfil-img">
+      </button>
+
+
+      <mat-menu #menu="matMenu">
+
+        <button mat-menu-item >
+          <mat-icon>home</mat-icon>
+          <span>Inicio</span>
+        </button>
+
+
+
+        <button mat-menu-item  (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button> 
+
+      </mat-menu>
+    </mat-toolbar>
+  </div>
+
+  <!-- mandado a llamar componentes -->
+  <div class="p-3">
+    <router-outlet ></router-outlet>
+  </div>  
+</mat-sidenav-container>
+</div>

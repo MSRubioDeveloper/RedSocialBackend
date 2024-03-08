@@ -1,0 +1,30 @@
+#nuevaPublicacion-foto{
+    display: flex;
+    flex-direction: row;
+    /* border: 2px solid rgb(182, 4, 4); */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #nuevaPublicacion-foto input{
+    height: 40px;
+    width: 100%;
+    background-color: #f0f2f5;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding-left: 10px;
+    font-size: 18px;
+  }
+  
+  #nuevaPublicacion-foto input:hover{
+    background-color: #dcdddd;
+    cursor: pointer;
+  }
+
+  .full-screen-dialog {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }

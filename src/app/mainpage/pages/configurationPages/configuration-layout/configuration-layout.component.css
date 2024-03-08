@@ -1,0 +1,22 @@
+.configurationBtn:hover{
+
+    background-color: #e6e6e6;
+    cursor: pointer;
+}
+.configurationBtn{
+
+    transition: all 100ms ease;
+}
+
+.border{
+    border-radius: 30px;
+}
+
+.container{
+    width: 70%;
+    
+    /* border: 1px solid black; */
+    margin: 0 auto;
+    margin-top: 20px;
+   
+}

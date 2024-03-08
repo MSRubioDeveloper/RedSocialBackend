@@ -1,0 +1,33 @@
+<div class="container">
+    <!-- <mat-card >
+        <mat-card-title class="p-3">Configuracion de cuenta</mat-card-title>
+
+
+    </mat-card> -->
+
+
+    
+    <mat-card class="p-2">
+
+            <div id="img-container">
+                <h2>Imagen de perfil</h2>
+                <img
+                    src="../../../../../assets/images/defaultImagePerfil.jpg" 
+                    alt="profile-image"  
+                    width="300px"   
+
+                >
+
+            </div>
+    
+            <div id="upload">
+                <input type="file" #fileInput>
+            </div>
+            <div id="upload">
+                <button mat-raised-button color="primary"
+                (click)="uploadImage()"
+                >Subir imagen</button>
+            </div>
+    
+    </mat-card>
+</div>

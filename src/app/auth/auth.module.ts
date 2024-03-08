@@ -24,6 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     NgPrimeModule,
     ReactiveFormsModule
+  ],
+  exports:[
+    
   ]
 })
 export class AuthModule { }

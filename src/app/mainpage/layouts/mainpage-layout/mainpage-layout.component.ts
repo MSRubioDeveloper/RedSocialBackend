@@ -16,4 +16,19 @@ export class MainpageLayoutComponent {
   // }
   //forma 2 de getter 
   public user = computed( ()=> this.authService.currentUser())
+
+  logout(){
+    this.authService.logout();
+  }
+
+
+  public sidebarItems = [
+    { label: "Inicio", icon: "home", url: "/app/main"},
+    { label: "Perfil", icon: "person", url: "/app/perfil"},
+    { label: "configuracion", icon: "settings", url: "/app/configurations"},
+    { label: "???", icon: "question_mark", url: "/app/random"},
+
+  ]
+
+
 }

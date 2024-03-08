@@ -1,0 +1,21 @@
+.container{
+    width: 70%;
+    
+    /* border: 1px solid black; */
+    margin: 0 auto;
+    margin-top: 20px;
+   
+}
+
+#img-container{
+    margin: 0 auto;
+}
+
+#img-container h2 {
+    text-align: center;
+}
+
+#upload{
+    margin-top: 20px;
+    text-align: center;
+}

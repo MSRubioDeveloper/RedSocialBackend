@@ -3,6 +3,7 @@ import { enviroment } from '../../../enviroments/enviroments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfaces';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfac
 export class AuthService {
 
  constructor() { 
-     this.checkAuthStatus().subscribe()
+    this.checkAuthStatus().subscribe()
   }
 
  
@@ -23,7 +24,7 @@ export class AuthService {
   }
 
 
-
+  private router = inject(Router)
   private readonly baseUrl: string = enviroment.baseUrl;
   private http = inject( HttpClient)
 
@@ -55,7 +56,10 @@ export class AuthService {
     const url = `${ this.baseUrl}/auth/check-token`;
     const token = localStorage.getItem("token");
 
-    if(!token) return of(false);
+    if(!token){
+      this.logout();
+      return of(false);
+    } 
 
     //httpHeaders: objeto que contiene headers de una peticion
     //ene ste caso mandamos el token de authorization para validar al usuario
@@ -72,5 +76,18 @@ export class AuthService {
            return of(false);
           })
         )
+  }
+
+
+
+  logout(){
+    //trata de hacer el logout
+    this._currentUser.set(null);
+    this._authStatus.set(AuthStatus.notAuthenticated);
+    localStorage.removeItem("token");
+
+    //no hay que hacer redirect porque en el app componnet ts ya estas manejando
+    //efectos de la señal, y alc ambiar en automatico redirige
+    // this.router.navigateByUrl("/auth/login")
   }
 }

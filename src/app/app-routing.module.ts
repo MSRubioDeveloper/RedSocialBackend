@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Error404PagesComponent } from './shared/pages/error404-pages/error404-pages.component';
 import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
+import { isNotAuthenticatedGuard } from './auth/guards';
 
 //Rutas principales de mi aplicacion
 const routes: Routes = [
 
   {
     path: "auth",
+    canActivate: [ isNotAuthenticatedGuard ],
     loadChildren: ()=> import("./auth/auth.module").then( m => m.AuthModule)
   },
   {
