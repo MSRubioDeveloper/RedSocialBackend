@@ -44,7 +44,7 @@
 }
 
 
-#login-btn{
+#register-btn{
 
   padding: 6px;
   width: 320px;
@@ -52,6 +52,11 @@
   margin-bottom: 10px;
   background: linear-gradient(to right, #542488, #3b3388);
 }
+  #register-btn:hover{
+    background: linear-gradient(to right, #9e44fd, #7060ff);
+    color: white;
+    cursor: pointer;
+  }
 
 .input-container p{
   margin-top: 10px;

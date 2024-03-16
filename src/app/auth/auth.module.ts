@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterPageComponent,
     VideoPageComponent,
 
+
   ],
   imports: [
     CommonModule,

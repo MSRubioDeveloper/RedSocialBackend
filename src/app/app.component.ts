@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 //toda aplicacion de angular pasa en todo momento 
 //por este archivo, aqui pueden ir las authentications
 export class AppComponent {
+  constructor(){
+
+  }
     
   private authService = inject(AuthService);
   private router = inject(Router)

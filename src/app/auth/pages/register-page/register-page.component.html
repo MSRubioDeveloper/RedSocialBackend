@@ -5,19 +5,24 @@
     <button (click)="redirectLogin()">Resgitrate</button>
   </div> -->
 
-  <div class="input-container">
-    <input #usuario type="text" placeholder="Nombre de usuario">
-    <input #email type="text" placeholder="email">
-    <input #password type="text" placeholder="password">
+  <form class="input-container" [formGroup]="myRegisterForm"
+    (ngSubmit)="register()"
+  >
+    <input formControlName="name" #usuario type="text" placeholder="Nombre de usuario">
+    <input formControlName="email" #email type="email" placeholder="email">
 
-    <button id="login-btn"> Registrate </button>
-    <a >Forgot Your Password?</a>
+    <input formControlName="password" #password type="password" placeholder="password">
+
+    <button id="register-btn" type="submit"> Registrate </button>
     <div>
       <a routerLink="/auth/login">¿Ya tienes cuenta?</a>
     </div>
 
+    <a >Forgot Your Password?</a>
+   
+
     <p> Al logearte aceptas los terminos y condiciones y la politica de privacidad</p>
-  </div>
+  </form>
 
 
 </div>

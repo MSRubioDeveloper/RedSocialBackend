@@ -26,40 +26,35 @@ export class LoginPageComponent {
   public propiedadesErrorInput: any;
 
   public myForm: FormGroup = this.fb.group({
-    email: ["msilvarubios3@hotmail.com", [Validators.required, Validators.pattern( customValidators.emailPattern)]],
-    password: ["miso7400", [Validators.required]]
+    email: ["", [Validators.required, Validators.pattern( customValidators.emailPattern)]],
+    password: ["", [Validators.required]]
   })
 
-  isValidField( field: string): boolean | null{
-    return this.myForm.controls[field].errors && 
-    this.myForm.controls[field].touched;
-  }
+//   isValidField( field: string): boolean | null{
+//     return this.myForm.controls[field].errors && 
+//     this.myForm.controls[field].touched;
+//   }
 
-  getFieldError( field:string ): string | null{
-    if( !this.myForm.controls[field]) return null;
+//   getFieldError( field:string ): string | null{
+//     if( !this.myForm.controls[field]) return null;
 
-    const errors = this.myForm.controls[field].errors || {}
+//     const errors = this.myForm.controls[field].errors || {}
 
-    for(const key of Object.keys(errors)){
-     switch( key ){
-       case "required":
-         return "Este campo es requerido";
+//     for(const key of Object.keys(errors)){
+//      switch( key ){
+//        case "required":
+//          return "Este campo es requerido";
 
-       case "minlength":
-         return `Minimo de ${ errors["minlength"].requiredLength } caracteres`;
-     }
-    }
+//        case "minlength":
+//          return `Minimo de ${ errors["minlength"].requiredLength } caracteres`;
+//      }
+//     }
 
-    return ""
- }
+//     return ""
+//  }
 
   login(){
-    if( this.myForm.invalid ){
-      this.toastr.error("Login fallido, ingresa un email valido y una contraseña")
-      this.myForm.markAllAsTouched();
-      this.propiedadesErrorInput = { border: '2px solid red'}
-      return
-    }
+   
     this.propiedadesErrorInput  = {};
 
     const { email, password} = this.myForm.value;
@@ -69,7 +64,11 @@ export class LoginPageComponent {
       .subscribe({
         next: ()=> this.router.navigateByUrl("/app"), //todo sale bn
         error: (error) => { //si service trae error
-          this.toastr.error( error)
+          this.propiedadesErrorInput = {'border': '2px solid red'}
+          if( error === "Cuenta No validada, revisa tu correo electronico"){
+            return this.toastr.info(error)
+          }
+          return this.toastr.error( error )
         }
       })
   }

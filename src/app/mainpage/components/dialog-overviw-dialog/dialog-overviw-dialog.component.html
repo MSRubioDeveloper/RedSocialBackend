@@ -1,4 +1,4 @@
-<div id="dialogContainer">
+<!-- <div id="dialogContainer">
     <mat-card class="dialog">
         <mat-card-title>Crea tu publicacion</mat-card-title>
         <mat-divider class="mt-2 mb-1"></mat-divider>
@@ -12,7 +12,7 @@
               
         </mat-card-header>
 
-        <!-- <mat-divider class="mt-2 mb-3"></mat-divider> -->
+        <!-- <mat-divider class="mt-2 mb-3"></mat-divider> 
         <div class="custom-textarea">
             <textarea id="DialogMessage" class="mb-1" placeholder="Escribe algo weon xd" >
             </textarea>
@@ -28,4 +28,33 @@
         </div>
     </mat-card>
     
-</div>
+</div> -->
+
+<h2 mat-dialog-title class="text-center">Crear Publicacion</h2>
+<mat-dialog-content class="mat-typography">
+ 
+   <div class="mb-1" id="DialogMessage-container" >
+        <textarea  #textAreaInput id="DialogMessage" placeholder="¿Que quieres publicar?" ></textarea>
+   </div>
+
+   <div class="addThingPub grid" >
+        <div id="addPub" class="col-5">
+            Agregar Publicacion
+        </div>
+        <div class="col-7 iconsContainer">
+            <input type="file" (change)="addFileToPub($event)" class="fileInput">
+            <!-- <mat-icon 
+                (click)="handleIconFunction( icon )"
+                class="icons" [ngStyle]="{ color: icon.color}" 
+                *ngFor="let icon of addOptions()">
+                {{icon.icon}}
+            </mat-icon> -->
+        </div>
+
+    </div>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="addPub( textAreaInput.value)"
+   mat-button [mat-dialog-close]="true" cdkFocusInitial>Agregar</button>
+</mat-dialog-actions>

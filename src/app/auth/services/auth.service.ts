@@ -27,6 +27,7 @@ export class AuthService {
   private router = inject(Router)
   private readonly baseUrl: string = enviroment.baseUrl;
   private http = inject( HttpClient)
+  private readonly authEndpointBaseUrl:string = enviroment.authEndpointBaseUrl;
 
   private _currentUser = signal<User| null>(null)
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
@@ -39,7 +40,7 @@ export class AuthService {
  
   login( email: string, password: string): Observable<boolean>{
     
-    const url = `${ this.baseUrl}/auth/login`;
+    const url = `${ this.baseUrl}/${this.authEndpointBaseUrl}/login`;
     const body = { email, password}
 
     return this.http.post<LoginResponse>(url, body)
@@ -47,13 +48,32 @@ export class AuthService {
         map( ({ user, token}) => {
           return this.setAuthenticationUser(user, token);
         }),         
-        catchError( err => throwError( () => "Credenciales invalidas"))
+        catchError( err => {
+          console.log(err)
+          return throwError( () =>   err.error.message);
+        })
       )
 
   }
 
+  public register(name: string, email: string, password: string): Observable<boolean>{
+    const url = `${ this.baseUrl}/${this.authEndpointBaseUrl}/register`;
+    const body = { name, email, password}
+
+
+    return this.http.post<LoginResponse>(url, body)
+      .pipe( 
+        map( ({user, token}) =>{
+          return true;
+        }),
+        catchError( err => {
+          return throwError( () =>   err.error.message);
+        })
+      )
+  }
+
   checkAuthStatus(): Observable<boolean>{
-    const url = `${ this.baseUrl}/auth/check-token`;
+    const url = `${ this.baseUrl}/${this.authEndpointBaseUrl}/check-token`;
     const token = localStorage.getItem("token");
 
     if(!token){

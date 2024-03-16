@@ -1,0 +1,51 @@
+
+
+
+<div id="card-container"  id="publicaciones-container">
+    <!-- Agregar publicacion -->
+    <app-add-publication-bar-component></app-add-publication-bar-component>
+    <!-- Publicacion  -->
+    <mat-card class="publicacion"
+      *ngFor="let item of publicaciones()"
+    >
+      <mat-card-header>
+
+        <div mat-card-avatar class="example-header-image">
+          <p-avatar  image="../../../../assets/images/defaultImagePerfil.jpg" 
+          size="large" shape="circle"></p-avatar>
+        </div>
+        <mat-card-title> {{ item.name }} </mat-card-title>
+        <mat-card-subtitle> Fecha pendiente </mat-card-subtitle>
+      </mat-card-header>
+      <h3 class="ml-3 mb-4 mt-5">
+        {{ item.text }}
+      </h3>
+
+      <img id="pubImg" class="m-2 mt-3" mat-card-image [src]="item.secureUrl" alt="PubImg">
+
+ 
+
+      <div class="pubButtonContainer mt-3 mb-2">
+          <button [style.color]="iconColor()" id="favorteBtn" (click)="like()"  mat-icon-button>
+              <mat-icon >favorite</mat-icon>
+          </button>
+          <button id="addComment" mat-icon-button>
+              <mat-icon >add_comment</mat-icon>
+          </button>
+          <button id="share" mat-icon-button>
+              <mat-icon>share</mat-icon>
+          </button>
+      </div>
+      <mat-card-content>
+          <p>
+            Likes: {{ item.likes}}
+          </p>
+       
+        </mat-card-content>
+       
+        <button mat-fab extended  id="masComentarios" class="mt-5 mb-3">
+          <mat-icon>visibility</mat-icon>
+          ver comentarios
+        </button>
+  </mat-card>
+</div>
