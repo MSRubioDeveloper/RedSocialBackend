@@ -30,6 +30,7 @@
       <!-- [ngStyle]="{'color': wasLiked(item.publicacion._id) }" -->
       <div class="pubButtonContainer mt-3 mb-2">
           <button 
+          [ngStyle]="{'color': isLiked(item.publicacion._id) ? 'red' : 'black'}"
             (click)="like( item.publicacion._id, $event)"  mat-icon-button
             >
               <mat-icon >favorite</mat-icon>

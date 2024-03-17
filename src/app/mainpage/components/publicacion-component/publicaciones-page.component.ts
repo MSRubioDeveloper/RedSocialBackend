@@ -29,7 +29,10 @@ export class PublicacionesPageComponent implements OnInit{
     //Pintar los likes
     // if (this.publicacionesService.allLikes().includes())
   }
-
+  isLiked(pubId: string): boolean {
+    // Suponiendo que publicacionesConLikeIds es un array en tu servicio que contiene los IDs de las publicaciones con likes
+    return this.publicacionesService.allLikes().some(pub => pub.idPub === pubId);
+  }
 
     get publicaciones(){
       return this.publicacionesService.publicaciones;
@@ -54,7 +57,7 @@ export class PublicacionesPageComponent implements OnInit{
       const button = event.currentTarget as HTMLButtonElement;
       const computedColor = window.getComputedStyle(button).color;
       console.log( computedColor)
-      if( computedColor === "rgba(0, 0, 0, 0.87)" || computedColor === "black"){
+      if( computedColor === "rgb(0, 0, 0)" || computedColor === "black"){
 
           //TODO comunicarse para dar like
         button.style.color = 'red';

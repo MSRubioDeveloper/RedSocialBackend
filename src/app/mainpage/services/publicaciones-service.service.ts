@@ -81,7 +81,7 @@ export class PublicacionesService{
 
 
   public like( pubId: string ){
-    this.http.get<boolean>(`${this.baseUrl}/publicaciones/like/${pubId}`)
+    this.http.get<boolean>(`${this.baseUrl}/publicaciones/like/${pubId}/${this.curretUser!._id}`)
       .subscribe( booleanLiked =>{
         this.liked.set( booleanLiked )
         console.log( this.liked())
@@ -100,6 +100,7 @@ export class PublicacionesService{
     }) 
 
     const arrayId =  {
+      idUser: this.curretUser?._id,
       idPublicaciones: JSON.stringify(idPublicaciones)
     }
 
