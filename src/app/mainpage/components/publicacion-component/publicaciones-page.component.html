@@ -1,12 +1,15 @@
 
 
+<p >
+  {{ likes().length }}
+</p>
 
 <div id="card-container"  id="publicaciones-container">
     <!-- Agregar publicacion -->
     <app-add-publication-bar-component></app-add-publication-bar-component>
     <!-- Publicacion  -->
     <mat-card class="publicacion"
-      *ngFor="let item of publicaciones()"
+      *ngFor="let item of publicaciones(); let i = index"
     >
       <mat-card-header>
 
@@ -14,19 +17,21 @@
           <p-avatar  image="../../../../assets/images/defaultImagePerfil.jpg" 
           size="large" shape="circle"></p-avatar>
         </div>
-        <mat-card-title> {{ item.name }} </mat-card-title>
-        <mat-card-subtitle> Fecha pendiente </mat-card-subtitle>
+        <mat-card-title> {{ item.user.name }} </mat-card-title>
+        <mat-card-subtitle> {{ publicFormatDate( item.publicacion.publication_date )}} </mat-card-subtitle>
       </mat-card-header>
       <h3 class="ml-3 mb-4 mt-5">
-        {{ item.text }}
+        {{ item.publicacion.text }}
       </h3>
 
-      <img id="pubImg" class="m-2 mt-3" mat-card-image [src]="item.secureUrl" alt="PubImg">
+      <img id="pubImg" class="m-2 mt-3" mat-card-image [src]="item.publicacion.secureUrl" alt="PubImg">
 
  
-
+      <!-- [ngStyle]="{'color': wasLiked(item.publicacion._id) }" -->
       <div class="pubButtonContainer mt-3 mb-2">
-          <button [style.color]="iconColor()" id="favorteBtn" (click)="like()"  mat-icon-button>
+          <button 
+            (click)="like( item.publicacion._id, $event)"  mat-icon-button
+            >
               <mat-icon >favorite</mat-icon>
           </button>
           <button id="addComment" mat-icon-button>
@@ -38,7 +43,8 @@
       </div>
       <mat-card-content>
           <p>
-            Likes: {{ item.likes}}
+            <!-- TODO -->
+            Likes: 
           </p>
        
         </mat-card-content>

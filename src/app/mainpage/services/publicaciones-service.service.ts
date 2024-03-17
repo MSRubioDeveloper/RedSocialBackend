@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { enviroment } from '../../../enviroments/enviroments';
 import { AuthService } from '../../auth/services/auth.service';
-import { GetActualDate } from '../helpers/getActualDate.helper';
+import { PublicacionResponse } from '../interfaces/publicaciones.interface';
+import { AllLikes } from '../interfaces/alllikes-reponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ import { GetActualDate } from '../helpers/getActualDate.helper';
 export class PublicacionesService{
 
   private baseUrl: string = enviroment.baseUrl;
-  public publicaciones = signal<any>("");
+  public publicaciones = signal<PublicacionResponse[] >([]);
+  public liked = signal<boolean>(false);
+  public allLikes = signal<AllLikes[]>([]);
 
   // public publicacionesComputed = computed( ()=> this.publicaciones() )
 
@@ -24,10 +27,10 @@ export class PublicacionesService{
   constructor(
     private http: HttpClient
   ) { 
-
+   
     console.log(this.curretUser)
   }
-
+  
 
   public addPublication( file: any , text: string){
 
@@ -36,26 +39,20 @@ export class PublicacionesService{
     }
     const formData = new FormData()
     formData.append("file", file );
-    formData.append("name", this.curretUser!.name);
+    formData.append("userId", this.curretUser!._id);
     formData.append("text", text);
-    formData.append("email", this.curretUser!.email);
-    formData.append("isActive", this.curretUser!.isActive.toString() );
-    formData.append("roles", this.curretUser!.roles[0] );
-    formData.append("imgPerfil", this.curretUser!.imgPerfil );
-    formData.append("publication_date", GetActualDate.Format())
+
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("token") || "";
+    headers = headers.append('Authorization', `Bearer ${token}`);
 
 
-     this.http.post(`${ this.baseUrl}/publicaciones/add`, formData)
-          .subscribe( pub=> {
-            console.log( pub )
-            this.publicaciones.update( values => {
-                return [pub, ...values ]
-            } );
+     this.http.post<PublicacionResponse[]>(`${ this.baseUrl}/publicaciones/add`, formData, { headers: headers})
+          .subscribe( publicaciones => {
+            this.publicaciones.set( publicaciones.reverse() )
 
-            // this.http.get(`${ this.baseUrl}/publicaciones/${ pub.imageUuid +"."+ pub.imgFileExtension}`)
-            //     .subscribe( resp => console.log( resp))
-
-            console.log( this.publicaciones() )
+            const pubId = this.publicaciones().map( pub => pub.publicacion._id);
+            this.getAllLikes();
           })
 
 
@@ -66,10 +63,58 @@ export class PublicacionesService{
 
   public getAllPublications(){
     const url = `${ this.baseUrl}/publicaciones/getAll`;
+    
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("token") || "";
+    headers = headers.append('Authorization', `Bearer ${token}`);
 
-    return this.http.get<any[]>(url)
+
+    return this.http.get<any[]>(url, { headers})
     .subscribe( allPublicaciones =>{
       this.publicaciones.set( allPublicaciones.reverse());
+
+       this.getAllLikes();
+      
+     
     })
   }
+
+
+  public like( pubId: string ){
+    this.http.get<boolean>(`${this.baseUrl}/publicaciones/like/${pubId}`)
+      .subscribe( booleanLiked =>{
+        this.liked.set( booleanLiked )
+        console.log( this.liked())
+      })
+  }
+
+  public getAllLikes(){
+    const url = `${ this.baseUrl}/publicaciones/getAllLikes`;
+    
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("token") || "";
+    headers = headers.append('Authorization', `Bearer ${token}`);
+
+    const idPublicaciones = this.publicaciones().map( pub =>{
+      return pub.publicacion._id
+    }) 
+
+    const arrayId =  {
+      idPublicaciones: JSON.stringify(idPublicaciones)
+    }
+
+    
+
+     this.http.post<any>(url, arrayId ,{ headers})
+      .subscribe( likesResponse =>{
+        console.log( likesResponse)
+        this.allLikes.set( likesResponse )
+
+
+      })
+  }
+
+
+  // pintarLikesAlIniciar( id: string )
+
 }

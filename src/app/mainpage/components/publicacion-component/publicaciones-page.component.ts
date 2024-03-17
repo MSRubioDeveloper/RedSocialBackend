@@ -1,5 +1,6 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, OnInit, computed, effect, inject, signal } from '@angular/core';
 import { PublicacionesService } from '../../services/publicaciones-service.service';
+import { GetActualDate } from '../../helpers/getActualDate.helper';
 
 
 @Component({
@@ -7,17 +8,28 @@ import { PublicacionesService } from '../../services/publicaciones-service.servi
   templateUrl: './publicaciones-page.component.html',
   styleUrl: './publicaciones-page.component.css'
 })
-export class PublicacionesPageComponent {
+export class PublicacionesPageComponent implements OnInit{
+  
 
-    public iconColor = signal("black");
+
+
+  // //TODO mueve esta signal al servicio
+     public iconColor = "black";
     private publicacionesService = inject( PublicacionesService)
   
     public allPublicaciones  = computed( ()=> this.publicaciones );
+    public allLikes = computed( ()=> this.likes)
 
     constructor(){
-      console.log( this.getAllPublicaciones() )
-    }
+      //Llamas a los likes y pubc, esto lo carga
+     this.getAllPublicaciones() 
   
+    }
+  ngOnInit(): void {
+    //Pintar los likes
+    // if (this.publicacionesService.allLikes().includes())
+  }
+
 
     get publicaciones(){
       return this.publicacionesService.publicaciones;
@@ -27,13 +39,43 @@ export class PublicacionesPageComponent {
       return this.publicacionesService.getAllPublications();
     }
 
+    //Likes
+    get likes(){
+      return this.publicacionesService.allLikes;
+    }
+
+    public getLikesPublicaciones(){
+      return this.publicacionesService.getAllLikes();
+    }
+
+
     //Colors
-    like(){
-      if( this.iconColor() == "black"){
-        this.iconColor.set("red")
+    like( pubId: string, event: MouseEvent ){
+      const button = event.currentTarget as HTMLButtonElement;
+      const computedColor = window.getComputedStyle(button).color;
+      console.log( computedColor)
+      if( computedColor === "rgba(0, 0, 0, 0.87)" || computedColor === "black"){
+
+          //TODO comunicarse para dar like
+        button.style.color = 'red';
+        return this.publicacionesService.like( pubId );
+      
       }else{
-        this.iconColor.set("black")
+        //TODO comunicarse para quitar like
+        button.style.color = 'black';
+        return this.publicacionesService.like( pubId );
       }
 
     }
+ 
+
+
+  
+
+    public publicFormatDate( fecha: string){
+      return GetActualDate.Format( fecha);
+    }
+
+   
+
 }

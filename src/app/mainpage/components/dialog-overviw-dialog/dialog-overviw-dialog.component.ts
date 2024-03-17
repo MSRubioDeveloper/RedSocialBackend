@@ -25,16 +25,6 @@ export class DialogOverviwDialogComponent {
     // { icon: "location_on", color:"red" },
   ]);
 
-  
-  // handleIconFunction(icon: IconOptionsInterface ){
-  //   switch(icon.icon){
-  //     case "image":
-  //       this.addImage();
-  //       break;
-      
-  //   }
-  // }
-
 
   addFileToPub(event: any){
     const file: File = event.target.files[0];
