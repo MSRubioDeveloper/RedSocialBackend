@@ -18,7 +18,7 @@ export class VideoPageComponent {
     // Establecer el volumen por defecto a 0.5 (50%)
     if (this.videoPlayerRef) {
       this.videoPlayerRef.nativeElement.muted = true;
-      this.videoPlayerRef.nativeElement.volume = 0.2;
+      this.videoPlayerRef.nativeElement.volume = 0.5;
 
 
     }

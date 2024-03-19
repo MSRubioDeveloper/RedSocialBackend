@@ -14,6 +14,7 @@ export class PublicacionesService{
   public publicaciones = signal<PublicacionResponse[] >([]);
   public liked = signal<boolean>(false);
   public allLikes = signal<AllLikes[]>([]);
+  public likesCountsWithId = signal<any[]>([]);
 
   // public publicacionesComputed = computed( ()=> this.publicaciones() )
 
@@ -28,7 +29,7 @@ export class PublicacionesService{
     private http: HttpClient
   ) { 
    
-    console.log(this.curretUser)
+    // console.log(this.curretUser)
   }
   
 
@@ -49,7 +50,7 @@ export class PublicacionesService{
 
      this.http.post<PublicacionResponse[]>(`${ this.baseUrl}/publicaciones/add`, formData, { headers: headers})
           .subscribe( publicaciones => {
-            this.publicaciones.set( publicaciones.reverse() )
+            this.publicaciones.set( publicaciones)
 
             const pubId = this.publicaciones().map( pub => pub.publicacion._id);
             this.getAllLikes();
@@ -71,9 +72,14 @@ export class PublicacionesService{
 
     return this.http.get<any[]>(url, { headers})
     .subscribe( allPublicaciones =>{
-      this.publicaciones.set( allPublicaciones.reverse());
+      this.publicaciones.set( allPublicaciones);
 
        this.getAllLikes();
+
+       const idPublicaciones = this.publicaciones().map( pub =>{
+        return pub.publicacion._id
+      }) 
+       this.getTotalLikes(JSON.stringify( idPublicaciones) )
       
      
     })
@@ -84,7 +90,7 @@ export class PublicacionesService{
     this.http.get<boolean>(`${this.baseUrl}/publicaciones/like/${pubId}/${this.curretUser!._id}`)
       .subscribe( booleanLiked =>{
         this.liked.set( booleanLiked )
-        console.log( this.liked())
+
       })
   }
 
@@ -116,6 +122,20 @@ export class PublicacionesService{
   }
 
 
-  // pintarLikesAlIniciar( id: string )
+  public getTotalLikes( IDPubs: string ){
+
+    const url = `${ this.baseUrl}/publicaciones/likes/countPubLikes?pubID=${IDPubs}`;
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("token") || "";
+    headers = headers.append('Authorization', `Bearer ${token}`);
+
+    
+
+    return this.http.post<any[]>(url, IDPubs, { headers: headers} )
+      .subscribe( totalLikes => {
+        console.log( totalLikes)
+        this.likesCountsWithId.set( totalLikes )
+      })
+  }
 
 }

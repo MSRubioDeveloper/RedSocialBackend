@@ -8,7 +8,7 @@ import { GetActualDate } from '../../helpers/getActualDate.helper';
   templateUrl: './publicaciones-page.component.html',
   styleUrl: './publicaciones-page.component.css'
 })
-export class PublicacionesPageComponent implements OnInit{
+export class PublicacionesPageComponent{
   
 
 
@@ -25,10 +25,7 @@ export class PublicacionesPageComponent implements OnInit{
      this.getAllPublicaciones() 
   
     }
-  ngOnInit(): void {
-    //Pintar los likes
-    // if (this.publicacionesService.allLikes().includes())
-  }
+
   isLiked(pubId: string): boolean {
     // Suponiendo que publicacionesConLikeIds es un array en tu servicio que contiene los IDs de las publicaciones con likes
     return this.publicacionesService.allLikes().some(pub => pub.idPub === pubId);
@@ -51,6 +48,12 @@ export class PublicacionesPageComponent implements OnInit{
       return this.publicacionesService.getAllLikes();
     }
 
+    //likes por Publicacion, mandar todo 
+    //el array y devolver los likes de esta Pagina
+    get totalLikesPub(){
+      return this.publicacionesService.likesCountsWithId
+    }
+
 
     //Colors
     like( pubId: string, event: MouseEvent ){
@@ -60,11 +63,26 @@ export class PublicacionesPageComponent implements OnInit{
       if( computedColor === "rgb(0, 0, 0)" || computedColor === "black"){
 
           //TODO comunicarse para dar like
+        this.publicacionesService.likesCountsWithId.update( values =>{
+        const filtredLike = values.filter( obj => obj.publicacionID == pubId);
+          filtredLike[0].likes = filtredLike[0].likes + 1
+
+          return [ ...values, filtredLike]
+        })
+         
         button.style.color = 'red';
         return this.publicacionesService.like( pubId );
       
       }else{
         //TODO comunicarse para quitar like
+
+        this.publicacionesService.likesCountsWithId.update( values =>{
+          const filtredLike = values.filter( obj => obj.publicacionID == pubId);
+            filtredLike[0].likes = filtredLike[0].likes -1
+      
+            return [ ...values, filtredLike]
+          })
+
         button.style.color = 'black';
         return this.publicacionesService.like( pubId );
       }

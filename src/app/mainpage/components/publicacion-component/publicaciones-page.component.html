@@ -1,9 +1,4 @@
 
-
-<p >
-  {{ likes().length }}
-</p>
-
 <div id="card-container"  id="publicaciones-container">
     <!-- Agregar publicacion -->
     <app-add-publication-bar-component></app-add-publication-bar-component>
@@ -43,9 +38,9 @@
           </button>
       </div>
       <mat-card-content>
-          <p>
+          <p *ngIf="totalLikesPub().length > 0 && totalLikesPub()[i].publicacionID == item.publicacion._id">
             <!-- TODO -->
-            Likes: 
+            Likes: {{ totalLikesPub()[i].likes }}
           </p>
        
         </mat-card-content>
