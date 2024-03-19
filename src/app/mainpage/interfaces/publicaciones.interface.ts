@@ -7,6 +7,7 @@ export interface Publicacion {
     _id:              string;
     user:             string;
     text:             string;
+    profileImgSecureUrl: string;
     // comentarios:      any[];
     // likes:            any[];
     secureUrl:        string;

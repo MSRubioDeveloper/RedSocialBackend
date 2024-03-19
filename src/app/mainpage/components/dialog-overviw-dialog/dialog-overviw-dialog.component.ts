@@ -27,10 +27,19 @@ export class DialogOverviwDialogComponent {
 
 
   addFileToPub(event: any){
-    const file: File = event.target.files[0];
+    
+    const file: File = event.target.files[0] ;
+    const extension = file.name.split(".").pop()?.toLocaleLowerCase();
+    const allowedExtensions = ["jpg", "png", "jpeg"];
 
-    this.file = file
-    console.log(file); 
+    if( allowedExtensions.includes( extension! )){
+      this.file = file
+      console.log(file); 
+      return;
+    }
+
+    event.target.value = ""
+    return alert("Extension no valida");
   }
 
   addPub(text: string  ){

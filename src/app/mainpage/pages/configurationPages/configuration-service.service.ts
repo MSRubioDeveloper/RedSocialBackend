@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { enviroment } from '../../../../enviroments/enviroments';
 import { AuthService } from '../../../auth/services/auth.service';
+import { ImgProfileResponse } from '../../interfaces/profileimg-response.interface';
 
 
 @Injectable({
@@ -27,9 +28,10 @@ export class ConfigurationServiceService {
     
   
     //! TODO
-     this.http.post(`${ this.baseUrl}/publicaciones/imageProfile`, formData, { headers: headers})
-     .subscribe( res =>{
-        console.log(res)
+     this.http.post<ImgProfileResponse>(`${ this.baseUrl}/publicaciones/imageProfile`, formData, { headers: headers})
+     .subscribe( profileImage =>{
+      this.authService.currentUser()!.imgPerfil = profileImage.img_url
+        console.log(profileImage.img_url)
      })
   } 
    

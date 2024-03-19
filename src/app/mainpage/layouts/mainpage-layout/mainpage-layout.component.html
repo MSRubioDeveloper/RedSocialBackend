@@ -6,7 +6,7 @@
   <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px'}">
       <mat-toolbar>
           <!-- <span>Menu</span> -->
-          <img id="menuImg" src="../../../../assets/images/defaultImagePerfil.jpg" alt="perfil-img">
+          <img id="menuImg" [src]="user()?.imgPerfil | imgProfilePipe" alt="perfil-img">
 
            
           <!-- <span id="name">{{ user()?.name}}</span> -->
@@ -45,7 +45,7 @@
       </button>
 
       <button id="imgBack" mat-icon-button [matMenuTriggerFor]="menu">
-        <img id="imgPerfil" src="../../../../assets/images/defaultImagePerfil.jpg" alt="perfil-img">
+        <img id="imgPerfil" [src]="user()?.imgPerfil | imgProfilePipe" alt="perfil-img">
       </button>
 
 

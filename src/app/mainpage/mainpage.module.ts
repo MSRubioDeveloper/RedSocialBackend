@@ -15,6 +15,7 @@ import { DialogOverviwDialogComponent } from './components/dialog-overviw-dialog
 import { ImagesPageComponent } from './pages/configurationPages/images-page/images-page.component';
 import { ConfigurationLayoutComponent } from './pages/configurationPages/configuration-layout/configuration-layout.component';
 import { AddPublicationBarComponentComponent } from './components/add-publication-bar-component/add-publication-bar-component.component';
+import { ImgProfilePipePipe } from './pipes/img-profile-pipe.pipe';
 
 
 
@@ -32,6 +33,13 @@ import { AddPublicationBarComponentComponent } from './components/add-publicatio
       ImagesPageComponent,
       ConfigurationLayoutComponent,
       AddPublicationBarComponentComponent,
+
+
+
+
+
+      //PIPES
+      ImgProfilePipePipe,
 
 
 

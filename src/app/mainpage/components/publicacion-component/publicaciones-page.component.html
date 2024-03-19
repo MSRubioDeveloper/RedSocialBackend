@@ -10,7 +10,7 @@
       <mat-card-header>
 
         <div mat-card-avatar class="example-header-image">
-          <p-avatar  image="../../../../assets/images/defaultImagePerfil.jpg" 
+          <p-avatar  [image]="item.publicacion.profileImgSecureUrl" 
           size="large" shape="circle"></p-avatar>
         </div>
         <mat-card-title> {{ item.user.name }} </mat-card-title>
