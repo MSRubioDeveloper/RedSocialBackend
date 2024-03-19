@@ -50,10 +50,15 @@ export class PublicacionesService{
 
      this.http.post<PublicacionResponse[]>(`${ this.baseUrl}/publicaciones/add`, formData, { headers: headers})
           .subscribe( publicaciones => {
-            this.publicaciones.set( publicaciones)
+            //Actualzia todo de nuevo
+            this.getAllPublications();
 
-            const pubId = this.publicaciones().map( pub => pub.publicacion._id);
-            this.getAllLikes();
+            const idPublicaciones = publicaciones.map( pub =>{
+              return pub.publicacion._id
+            });
+            this.getTotalLikes(JSON.stringify( idPublicaciones))
+   
+ 
           })
 
 
@@ -72,13 +77,18 @@ export class PublicacionesService{
 
     return this.http.get<any[]>(url, { headers})
     .subscribe( allPublicaciones =>{
+
+      console.log({ allPublicaciones})
       this.publicaciones.set( allPublicaciones);
 
+      //Actualiza visualmente los likes
        this.getAllLikes();
 
        const idPublicaciones = this.publicaciones().map( pub =>{
         return pub.publicacion._id
-      }) 
+   
+      });
+      console.log({ idPublicaciones})
        this.getTotalLikes(JSON.stringify( idPublicaciones) )
       
      
