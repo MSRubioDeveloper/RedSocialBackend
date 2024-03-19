@@ -12,6 +12,7 @@ export class ImagesPageComponent {
   
   private http = inject( HttpClient )
   private readonly baseUrl: string = enviroment.baseUrl;
+  public imgSrc: any = "";
 
   constructor( private configService: ConfigurationServiceService){}
 
@@ -20,28 +21,21 @@ export class ImagesPageComponent {
   async uploadImage(){
       const fileInput: HTMLInputElement = this.fileInput.nativeElement;
       const file: File = fileInput.files![0]
-      console.log(file)
-       const formData = new FormData();
-       formData.append("file", file)
-  
-      // console.log(formData.get("file"))
-  
-        // const res = await this.configService.uploadImageToBackend( FormData );
-        // console.log(res)
         
-
-        //mandar image al backend
-        const url = `${ this.baseUrl}/files`
+       this.configService.uploadImageToBackend( file )
+     
+    }
   
-      const resp = await fetch( url, {
-        method: "POST",
-        headers: {
 
-        },
-        body: formData
-      })
+  public readURL( event: any){
+    if ( event.target && event.target.files && event.target.files[0]) {
+      console.log( { event})
+      const file = event.target.files[0];
 
-      console.log( await resp.json())
+      const reader = new FileReader();
+      reader.onload = e => this.imgSrc = reader.result;
 
-  } 
+      reader.readAsDataURL(file);
+    }
+  }
 }

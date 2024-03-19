@@ -12,7 +12,7 @@
             <div id="img-container">
                 <h2>Imagen de perfil</h2>
                 <img
-                    src="../../../../../assets/images/defaultImagePerfil.jpg" 
+                    [src]="imgSrc ||  '../../../../../assets/images/defaultImagePerfil.jpg'" 
                     alt="profile-image"  
                     width="300px"   
 
@@ -21,7 +21,7 @@
             </div>
     
             <div id="upload">
-                <input type="file" #fileInput>
+                <input type="file" #fileInput (change)="readURL($event);" >
             </div>
             <div id="upload">
                 <button mat-raised-button color="primary"
