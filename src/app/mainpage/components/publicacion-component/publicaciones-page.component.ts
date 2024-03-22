@@ -11,6 +11,10 @@ import { GetActualDate } from '../../helpers/getActualDate.helper';
 export class PublicacionesPageComponent{
   
 
+  //geter skeleton
+  get loadingG(){
+    return this.publicacionesService.loading;
+  }
 
 
   // //TODO mueve esta signal al servicio
@@ -23,7 +27,7 @@ export class PublicacionesPageComponent{
     constructor(){
       //Llamas a los likes y pubc, esto lo carga
      this.getAllPublicaciones() 
-  
+
     }
 
   isLiked(pubId: string): boolean {

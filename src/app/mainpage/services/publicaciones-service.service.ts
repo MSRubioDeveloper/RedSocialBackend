@@ -16,7 +16,8 @@ export class PublicacionesService{
   public allLikes = signal<AllLikes[]>([]);
   public likesCountsWithId = signal<any[]>([]);
 
-  // public publicacionesComputed = computed( ()=> this.publicaciones() )
+  //sekeleton
+  public loading = signal<boolean>(true);
 
 
   //User
@@ -57,8 +58,7 @@ export class PublicacionesService{
               return pub.publicacion._id
             });
             this.getTotalLikes(JSON.stringify( idPublicaciones))
-   
- 
+          
           })
 
 
@@ -66,8 +66,8 @@ export class PublicacionesService{
             
   }
 
-  //Lets start:
-  
+  //! implementa skeletons en tu web:
+
   public getAllPublications(){
     const url = `${ this.baseUrl}/publicaciones/getAll`;
     
@@ -79,20 +79,24 @@ export class PublicacionesService{
     return this.http.get<any[]>(url, { headers})
     .subscribe( allPublicaciones =>{
 
-      console.log({ allPublicaciones})
-      this.publicaciones.set( allPublicaciones);
-
-      //Actualiza visualmente los likes
-       this.getAllLikes();
-
-       const idPublicaciones = this.publicaciones().map( pub =>{
-        return pub.publicacion._id
-   
-      });
-      console.log({ idPublicaciones})
-       this.getTotalLikes(JSON.stringify( idPublicaciones) )
       
-     
+       setTimeout(()=>{
+       
+          this.publicaciones.set( allPublicaciones);
+
+          //Actualiza visualmente los likes
+          this.getAllLikes();
+
+          const idPublicaciones = this.publicaciones().map( pub =>{
+            return pub.publicacion._id
+      
+          });
+          this.getTotalLikes(JSON.stringify( idPublicaciones) )
+                
+          //loading a false
+          this.loading.set(false);
+       }, 2000)
+
     })
   }
 

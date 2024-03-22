@@ -16,6 +16,7 @@ import { ImagesPageComponent } from './pages/configurationPages/images-page/imag
 import { ConfigurationLayoutComponent } from './pages/configurationPages/configuration-layout/configuration-layout.component';
 import { AddPublicationBarComponentComponent } from './components/add-publication-bar-component/add-publication-bar-component.component';
 import { ImgProfilePipePipe } from './pipes/img-profile-pipe.pipe';
+import { SkeletonPublicationComponent } from './components/skeleton-publication/skeleton-publication.component';
 
 
 
@@ -40,6 +41,7 @@ import { ImgProfilePipePipe } from './pipes/img-profile-pipe.pipe';
 
       //PIPES
       ImgProfilePipePipe,
+                SkeletonPublicationComponent,
 
 
 

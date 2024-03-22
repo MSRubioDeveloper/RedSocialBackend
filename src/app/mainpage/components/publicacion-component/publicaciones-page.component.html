@@ -1,8 +1,12 @@
+
 <div id="card-container"  id="publicaciones-container">
-    <!-- Agregar publicacion -->
-    <app-add-publication-bar-component></app-add-publication-bar-component>
+
     <!-- Publicacion  -->
     @if( publicaciones()){
+      
+                <!-- Agregar publicacion -->
+    <app-add-publication-bar-component *ngIf="!loadingG()" ></app-add-publication-bar-component>
+
     <mat-card class="publicacion"
       *ngFor="let item of publicaciones(); let i = index"
     >
@@ -13,8 +17,8 @@
             <p-avatar  [image]="item.publicacion.profileImgSecureUrl" 
             size="large" shape="circle"></p-avatar>
           }@else {
-            <p-avatar  image="../../../../assets/images/defaultImagePerfil.jpg" 
-            size="large" shape="circle"></p-avatar>
+              <p-avatar  image="../../../../assets/images/defaultImagePerfil.jpg" 
+              size="large" shape="circle"></p-avatar>
           }
 
         </div>
