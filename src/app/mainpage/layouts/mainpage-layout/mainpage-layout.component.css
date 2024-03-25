@@ -34,11 +34,22 @@
 }
 #imgPerfil{
   border-radius: 50px;
-  width: 33px;
-  height: 33px;
+  width: 42px;
+  height: 42px;
 }
 
 .menu-container mat-toolbar{
   /* background-color:#23252b ; */
 }
 
+
+
+
+/* BARRA SUPERIOR */
+/* #topMenu{
+  height: 300px;
+} */
+
+mat-toolbar{
+  height: 70px;
+}
