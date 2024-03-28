@@ -13,13 +13,10 @@ export class ConfigurationServiceService {
   private http = inject( HttpClient )
   private readonly baseUrl: string = enviroment.baseUrl; 
   private authService = inject( AuthService );
-  public loadingImageUpload = signal<boolean>(false);
+
 
 
   public uploadImageToBackend(file: any){
-
-    this.loadingImageUpload.set( true );
-
     const formData = new FormData();
     formData.append("file", file)
     formData.append("idUser", this.authService.currentUser()!._id )
@@ -29,13 +26,8 @@ export class ConfigurationServiceService {
     
   
     //! TODO
-     this.http.post<ImgProfileResponse>(`${ this.baseUrl}/publicaciones/imageProfile`, formData, { headers: headers})
-     .subscribe( profileImage =>{
-      this.authService.currentUser()!.imgPerfil = profileImage.img_url
-        console.log(profileImage.img_url);
-
-        this.loadingImageUpload.set( false );
-     })
+     return this.http.post<ImgProfileResponse>(`${ this.baseUrl}/publicaciones/imageProfile`, formData, { headers: headers})
+  
   } 
    
 

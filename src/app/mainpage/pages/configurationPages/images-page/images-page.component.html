@@ -1,33 +1,32 @@
-<div class="container">
-    <!-- <mat-card >
-        <mat-card-title class="p-3">Configuracion de cuenta</mat-card-title>
-
-
-    </mat-card> -->
-
-
-    
+<div class="container"> 
     <mat-card class="p-2">
-
             <div id="img-container">
-                <h2>Imagen de perfil</h2>
-                <img
-                    [src]="imgSrc ||  '../../../../../assets/images/defaultImagePerfil.jpg'" 
-                    alt="profile-image"  
-                    width="300px"   
+                <h2>Subir imagen de perfil</h2>
 
-                >
+                <img 
+                [src]="imgSrc" 
+                alt="profile-image" id="imgPreview">
 
             </div>
-    
+            <!-- (click)="uploadImage()" -->
             <div id="upload">
-                <input type="file" #fileInput (change)="readURL($event);" >
+                <label for="fileInput" class="custom-file-upload"
+                [ngClass]="{'inputWithFile': inputHasAnImage }"
+                >
+                    <shared-circle-loader *ngIf="loadingImg"></shared-circle-loader>
+                    {{ textoLabel }}
+                </label>
+                <input type="file" id="fileInput" #fileInput (change)="readURL($event);" >
             </div>
+
+
+
             <div id="upload">
                 <button mat-raised-button color="primary"
-                (click)="uploadImage()"
+                (click)="openDialog('300ms', '600ms')"
                 >Subir imagen</button>
             </div>
     
     </mat-card>
 </div>
+

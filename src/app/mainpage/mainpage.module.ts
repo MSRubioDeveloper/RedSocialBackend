@@ -17,6 +17,7 @@ import { ConfigurationLayoutComponent } from './pages/configurationPages/configu
 import { AddPublicationBarComponentComponent } from './components/add-publication-bar-component/add-publication-bar-component.component';
 import { ImgProfilePipePipe } from './pipes/img-profile-pipe.pipe';
 import { SkeletonPublicationComponent } from './components/skeleton-publication/skeleton-publication.component';
+import { MATDialogUploadProfileImgComponent } from './components/matdialog-upload-profile-img/matdialog-upload-profile-img.component';
 
 
 
@@ -42,6 +43,7 @@ import { SkeletonPublicationComponent } from './components/skeleton-publication/
       //PIPES
       ImgProfilePipePipe,
                 SkeletonPublicationComponent,
+                MATDialogUploadProfileImgComponent,
 
 
 

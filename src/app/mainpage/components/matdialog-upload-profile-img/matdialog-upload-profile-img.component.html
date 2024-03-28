@@ -1,0 +1,30 @@
+
+<h2 mat-dialog-title class="text-center" *ngIf="status == 'nothing'">Subir imagen</h2>
+<h2 mat-dialog-title class="text-center" *ngIf="status == 'inProcess'">Subiendo imagen...</h2>
+<!-- <h2 mat-dialog-title class="text-center" *ngIf="status == 'finished'">Imagen subida correctamente!</h2> -->
+<mat-dialog-content class="mat-typography"*ngIf="status == 'nothing'">
+
+    <div class="flex justify-content-center mb-4">
+        <img [src]="imgSrc" id="imagePreview">
+    </div>
+
+    <p>Estas a punto de subir la siguiente imagen de perfil. ¿Estas seguro de subir esta imagen?</p>
+   
+</mat-dialog-content>
+<mat-dialog-content *ngIf="loader" class="flex justify-content-center mt-5">
+    <shared-circle-loader [width]="'150'" [heigth]="'150'" [stroke]="'#808080'"></shared-circle-loader>
+
+</mat-dialog-content>
+
+<!-- <mat-dialog-content *ngIf="status == 'finished'" class="flex justify-content-center mt-5">
+    <p> Tu imagen de perfil se a actualizado correctamente, ya puedes cerrar esta ventana </p>
+</mat-dialog-content> -->
+
+<mat-dialog-actions align="end" *ngIf="status == 'nothing'" >
+    <button  mat-button [mat-dialog-close]="true" cdkFocusInitial color="warn">Cancelar</button>
+    <button mat-button cdkFocusInitial color="primary" (click)="uploadImage()">Agregar</button>
+</mat-dialog-actions>
+
+<!-- <mat-dialog-actions align="end" *ngIf="status == 'finished'" >
+    <button  mat-button [mat-dialog-close]="true" cdkFocusInitial color="warn">Cerrar</button>
+</mat-dialog-actions> -->

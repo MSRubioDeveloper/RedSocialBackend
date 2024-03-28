@@ -4,6 +4,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { MaterialModule } from '../material/material.module';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
+import { CircleLoaderComponent } from './components/circle-loader/circle-loader.component';
 
 
 
@@ -11,7 +12,8 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
   declarations: [
     Error404PagesComponent,
     SidebarComponent,
-    SideNavComponent
+    SideNavComponent,
+    CircleLoaderComponent
   ],
   imports: [
     MaterialModule,
@@ -20,7 +22,8 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
   exports:[
     Error404PagesComponent, //exportas a otros modulos,
     SidebarComponent,
-    SideNavComponent
+    SideNavComponent,
+    CircleLoaderComponent
   ]
 })
 export class SharedModule { }
